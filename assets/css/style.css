@@ -1,0 +1,78 @@
+body {
+	background:url("../images/background.jpg");
+	background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    font-family: 'Kalam', cursive;
+}
+
+.wrapper {
+	margin:0 auto;
+	width:1000px;
+}
+
+
+h1{
+	font-size: 40px;
+	font-weight: bold;
+	text-align: right;
+	padding-top: 30px;
+	padding-right: 50px;
+}
+
+.spidermanImg,
+.batmanImg,
+.ironmanImg,
+.supermanImg
+{
+	position:relative;
+	float:left;
+	margin-right: 20px;
+}
+
+img {
+	padding:20px;
+	background-color: white;
+	width:90px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+}
+
+.heroName {
+	font-size: 16px;
+	position:absolute;
+	top: 4px;
+	left:33px;
+}
+
+.remainingLife {
+	font-size: 16px;
+	position:absolute;
+	top: 113px;
+	left:55px;
+}
+
+.yourCharDiv,
+.enemyCharDiv,
+.defenderDiv,
+.fightDiv,
+.restartDiv
+{
+	clear:both;
+	font-size: 25px;
+	margin-bottom: 20px;
+}
+
+.infoDiv
+{
+	clear:both;
+	font-size: 16px;
+}
+
+
+.restartDiv {
+	display: none;
+}
+
+
