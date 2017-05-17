@@ -1,23 +1,27 @@
 $(document).ready(function() {
 	var spiderman = {
+		name: "Spiderman",
 		healthPoint: 100,
 		attackPower: 15,
 		cAttackPower: 5
 	}
 
 	var batman = {
+		name: "Batman",
 		healthPoint: 120,
 		attackPower: 8,
 		cAttackPower: 12
 	}
 
 	var ironman = {
+		name: "Ironman",
 		healthPoint: 150,
 		attackPower: 6,
 		cAttackPower: 19
 	}
 
 	var superman = {
+		name: "Superman",
 		healthPoint: 180,
 		attackPower: 4,
 		cAttackPower: 25
@@ -66,6 +70,38 @@ $(document).ready(function() {
 		$(".restartDiv").css("display", "none");
 
 	}
+
+	var fight =function (myHero, myHP, enemyHero, enemyHeroImg, enemyHP) {
+			attackCnt++;
+			enemyHero.healthPoint = enemyHero.healthPoint - (myHero.attackPower*attackCnt);
+			$(enemyHP).text(enemyHero.healthPoint);
+			if(enemyHero.healthPoint<=0) {
+				$(enemyHeroImg).css("display", "none");
+				enemyCnt++;
+				if (enemyCnt<3) {
+					enemyChar=0;
+					$(".infoDiv").html("You have defeated " + enemyHero.name +" , please choose another enemy");
+				}
+				else {
+					$(".infoDiv").html("You won! Game Over!");
+					$(".restartDiv").css("display", "inline");
+				}
+			}
+			else {
+				myHero.healthPoint= myHero.healthPoint - enemyHero.cAttackPower;
+				$(myHP).text(myHero.healthPoint);
+				$(".infoDiv").html("You attacked " + enemyHero.name +" for "+ (myHero.attackPower*attackCnt)+ " damage.<br>The " + enemyHero.name +" attacked you back for "+ enemyHero.cAttackPower + " damage.");
+
+				
+				if (myHero.healthPoint<=0) {
+					enemyCnt=3;
+					$(".infoDiv").html("You lost! Game Over!");
+					$(".restartDiv").css("display", "inline");
+				}
+			}
+
+		}
+
 
 
 $(".spidermanImg").on("click", function(){
@@ -162,370 +198,59 @@ else {
 
 	if (myChar==1) {
 		if (enemyChar==2){
-			attackCnt++;
-			batman.healthPoint = batman.healthPoint - (spiderman.attackPower*attackCnt);
-			$(".batmanImg>.remainingLife").text(batman.healthPoint);
-			if(batman.healthPoint<=0) {
-				$(".batmanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Batman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				spiderman.healthPoint= spiderman.healthPoint - batman.cAttackPower;
-				$(".spidermanImg>.remainingLife").text(spiderman.healthPoint);
-				$(".infoDiv").html("You attacked Batman for "+ (spiderman.attackPower*attackCnt)+ " damage.<br>The Batman attacked you back for "+ batman.cAttackPower + "damage.");
-
-				
-				if (spiderman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-
+			fight(spiderman, ".spidermanImg>.remainingLife", batman, ".batmanImg", ".batmanImg>.remainingLife");
 		}
 
-
 		if (enemyChar==3){
-			attackCnt++;
-			ironman.healthPoint = ironman.healthPoint - (spiderman.attackPower*attackCnt);
-			$(".ironmanImg>.remainingLife").text(ironman.healthPoint);
-			if(ironman.healthPoint<=0) {
-				$(".ironmanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Ironman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				spiderman.healthPoint= spiderman.healthPoint - ironman.cAttackPower;
-				$(".spidermanImg>.remainingLife").text(spiderman.healthPoint);
-				$(".infoDiv").html("You attacked Ironman for "+ (spiderman.attackPower*attackCnt)+ " damage.<br>The Ironman attacked you back for "+ ironman.cAttackPower + "damage.");
-
-				
-				if (spiderman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-
+			fight(spiderman, ".spidermanImg>.remainingLife", ironman, ".ironmanImg", ".ironmanImg>.remainingLife");
 		}
 
 		if (enemyChar==4){
-			attackCnt++;
-			superman.healthPoint = superman.healthPoint - (spiderman.attackPower*attackCnt);
-			$(".supermanImg>.remainingLife").text(superman.healthPoint);
-			if(superman.healthPoint<=0) {
-				$(".supermanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Superman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				spiderman.healthPoint= spiderman.healthPoint - superman.cAttackPower;
-				$(".spidermanImg>.remainingLife").text(spiderman.healthPoint);
-				$(".infoDiv").html("You attacked Superman for "+ (spiderman.attackPower*attackCnt)+ " damage.<br>The Superman attacked you back for "+ superman.cAttackPower + "damage.");
-
-				
-				if (spiderman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
+			fight(spiderman, ".spidermanImg>.remainingLife", superman, ".supermanImg", ".supermanImg>.remainingLife");
 		}
 	}
 
 	if (myChar==2) {
 		if (enemyChar==1){
-			attackCnt++;
-			spiderman.healthPoint = spiderman.healthPoint - (batman.attackPower*attackCnt);
-			$(".spidermanImg>.remainingLife").text(spiderman.healthPoint);
-			if(spiderman.healthPoint<=0) {
-				$(".spidermanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Spiderman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				batman.healthPoint= batman.healthPoint - spiderman.cAttackPower;
-				$(".batmanImg>.remainingLife").text(batman.healthPoint);
-				$(".infoDiv").html("You attacked Spiderman for "+ (batman.attackPower*attackCnt)+ " damage.<br>The Spiderman attacked you back for "+ spiderman.cAttackPower + "damage.");
-
-				if (batman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
+			fight(batman, ".batmanImg>.remainingLife", spiderman, ".spidermanImg", ".spidermanImg>.remainingLife");
 		}
 
 		if (enemyChar==3){
-			attackCnt++;
-			ironman.healthPoint = ironman.healthPoint - (batman.attackPower*attackCnt);
-			$(".ironmanImg>.remainingLife").text(ironman.healthPoint);
-			if(ironman.healthPoint<=0) {
-				$(".ironmanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Ironman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				batman.healthPoint= batman.healthPoint - ironman.cAttackPower;
-				$(".batmanImg>.remainingLife").text(batman.healthPoint);
-				$(".infoDiv").html("You attacked Ironman for "+ (batman.attackPower*attackCnt)+ " damage.<br>The Ironman attacked you back for "+ ironman.cAttackPower + "damage.");
-
-				
-				if (batman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-
+			fight(batman, ".batmanImg>.remainingLife", ironman, ".ironmanImg", ".ironmanImg>.remainingLife");
 		}
 
 		if (enemyChar==4){
-			attackCnt++;
-			superman.healthPoint = superman.healthPoint - (batman.attackPower*attackCnt);
-			$(".supermanImg>.remainingLife").text(superman.healthPoint);
-			if(superman.healthPoint<=0) {
-				$(".supermanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Superman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				batman.healthPoint= batman.healthPoint - superman.cAttackPower;
-				$(".batmanImg>.remainingLife").text(batman.healthPoint);
-				$(".infoDiv").html("You attacked Superman for "+ (batman.attackPower*attackCnt)+ " damage.<br>The Superman attacked you back for "+ superman.cAttackPower + "damage.");
-
-				
-				if (batman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
+			fight(batman, ".batmanImg>.remainingLife", superman, ".supermanImg", ".supermanImg>.remainingLife");
 		}
 	}
 
 
 	if (myChar==3) {
 		if (enemyChar==1){
-			attackCnt++;
-			spiderman.healthPoint = spiderman.healthPoint - (ironman.attackPower*attackCnt);
-			$(".spidermanImg>.remainingLife").text(spiderman.healthPoint);
-			if(spiderman.healthPoint<=0) {
-				$(".spidermanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Spiderman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				ironman.healthPoint= ironman.healthPoint - spiderman.cAttackPower;
-				$(".ironmanImg>.remainingLife").text(ironman.healthPoint);
-				$(".infoDiv").html("You attacked Spiderman for "+ (ironman.attackPower*attackCnt)+ " damage.<br>The Spiderman attacked you back for "+ spiderman.cAttackPower + "damage.");
-
-				if (ironman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
+			fight(ironman, ".ironmanImg>.remainingLife", spiderman, ".spidermanImg", ".spidermanImg>.remainingLife");
 		}
 
 		if (enemyChar==2){
-			attackCnt++;
-			batman.healthPoint = batman.healthPoint - (ironman.attackPower*attackCnt);
-			$(".batmanImg>.remainingLife").text(batman.healthPoint);
-			if(batman.healthPoint<=0) {
-				$(".batmanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Batman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				ironman.healthPoint= ironman.healthPoint - batman.cAttackPower;
-				$(".ironmanImg>.remainingLife").text(ironman.healthPoint);
-				$(".infoDiv").html("You attacked Batman for "+ (ironman.attackPower*attackCnt)+ " damage.<br>The Batman attacked you back for "+ batman.cAttackPower + "damage.");
-
-				if (ironman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-
+			fight(ironman, ".ironmanImg>.remainingLife", batman, ".batmanImg", ".batmanImg>.remainingLife");
 		}
 
 		if (enemyChar==4){
-			attackCnt++;
-			superman.healthPoint = superman.healthPoint - (ironman.attackPower*attackCnt);
-			$(".supermanImg>.remainingLife").text(superman.healthPoint);
-			if(superman.healthPoint<=0) {
-				$(".supermanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Superman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				ironman.healthPoint= ironman.healthPoint - superman.cAttackPower;
-				$(".ironmanImg>.remainingLife").text(ironman.healthPoint);
-				$(".infoDiv").html("You attacked Superman for "+ (ironman.attackPower*attackCnt)+ " damage.<br>The Superman attacked you back for "+ superman.cAttackPower + "damage.");
-
-				if (ironman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
+			fight(ironman, ".ironmanImg>.remainingLife", superman, ".supermanImg", ".supermanImg>.remainingLife");
 		}
 	}
 
 
 	if (myChar==4) {
 		if (enemyChar==1){
-			attackCnt++;
-			spiderman.healthPoint = spiderman.healthPoint - (superman.attackPower*attackCnt);
-			$(".spidermanImg>.remainingLife").text(spiderman.healthPoint);
-			if(spiderman.healthPoint<=0) {
-				$(".spidermanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Spiderman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				superman.healthPoint= superman.healthPoint - spiderman.cAttackPower;
-				$(".supermanImg>.remainingLife").text(superman.healthPoint);
-				$(".infoDiv").html("You attacked Spiderman for "+ (superman.attackPower*attackCnt)+ " damage.<br>The Spiderman attacked you back for "+ spiderman.cAttackPower + "damage.");
-
-				if (superman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
+			fight(superman, ".supermanImg>.remainingLife", spiderman, ".spidermanImg", ".spidermanImg>.remainingLife");
 		}
 
 		if (enemyChar==2){
-			attackCnt++;
-			batman.healthPoint = batman.healthPoint - (superman.attackPower*attackCnt);
-			$(".batmanImg>.remainingLife").text(batman.healthPoint);
-			if(batman.healthPoint<=0) {
-				$(".batmanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Batman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				superman.healthPoint= superman.healthPoint - batman.cAttackPower;
-				$(".supermanImg>.remainingLife").text(superman.healthPoint);
-				$(".infoDiv").html("You attacked Batman for "+ (superman.attackPower*attackCnt)+ " damage.<br>The Batman attacked you back for "+ batman.cAttackPower + "damage.");
-
-				if (superman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-
+			fight(superman, ".supermanImg>.remainingLife", batman, ".batmanImg", ".batmanImg>.remainingLife");
 		}
 
 		if (enemyChar==3){
-			attackCnt++;
-			ironman.healthPoint = ironman.healthPoint - (superman.attackPower*attackCnt);
-			$(".ironmanImg>.remainingLife").text(ironman.healthPoint);
-			if(ironman.healthPoint<=0) {
-				$(".ironmanImg").css("display", "none");
-				enemyCnt++;
-				if (enemyCnt<3) {
-					enemyChar=0;
-					$(".infoDiv").html("You have defeated Ironman, please choose another enemy");
-				}
-				else {
-					$(".infoDiv").html("You won! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
-			else {
-				superman.healthPoint= superman.healthPoint - ironman.cAttackPower;
-				$(".supermanImg>.remainingLife").text(superman.healthPoint);
-				$(".infoDiv").html("You attacked Ironman for "+ (superman.attackPower*attackCnt)+ " damage.<br>The Ironman attacked you back for "+ ironman.cAttackPower + "damage.");
-
-				if (superman.healthPoint<=0) {
-					enemyCnt=3;
-					$(".infoDiv").html("You lost! Game Over!");
-					$(".restartDiv").css("display", "inline");
-				}
-			}
+			fight(superman, ".supermanImg>.remainingLife", ironman, ".ironmanImg", ".ironmanImg>.remainingLife");
 		}
 	}
 }
@@ -535,8 +260,5 @@ else {
 $(".restartBtnStyle").on("click",function(){
 	init();
 });
-
-
-
 
 });
