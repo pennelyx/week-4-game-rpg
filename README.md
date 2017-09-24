@@ -1,4 +1,4 @@
-#SuperHero-rpg
+SuperHero-rpg
 
 Select an hero and defeat other heros. Try to survive!
 
